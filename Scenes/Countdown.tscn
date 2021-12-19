@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Inputs/Theme/fat_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Inputs/Game_Elements/RadialSprite/CountdownTex_fnt.png" type="Texture" id=2]
+[ext_resource path="res://Inputs/Game_Elements/RadialSprite/CountdownTex_bkg.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Countdown.gd" type="Script" id=4]
+[ext_resource path="res://Inputs/Audio/UI/tick_004.ogg" type="AudioStream" id=5]
+
+[node name="Countdown" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 60.0
+
+[node name="Message" type="Label" parent="."]
+margin_left = -556.0
+margin_top = 184.0
+margin_right = 179.0
+margin_bottom = 297.0
+theme = ExtResource( 1 )
+text = "30 Seconds Left!"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_left = -174.0
+margin_top = -176.0
+margin_right = 176.0
+margin_bottom = 174.0
+max_value = 60.0
+step = 0.01
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+fill_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TickingSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -17.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

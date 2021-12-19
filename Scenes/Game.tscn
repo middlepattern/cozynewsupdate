@@ -1,0 +1,116 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Inputs/Menu_Elements/Obu_Menu_Anim/PepperPig_000.png" type="Texture" id=1]
+[ext_resource path="res://Inputs/Menu_Elements/Obu_Menu_Anim/PepperPig_001.png" type="Texture" id=2]
+[ext_resource path="res://Inputs/Game_Elements/speaking_bar.png" type="Texture" id=3]
+[ext_resource path="res://Inputs/Game_Elements/MouthShapes/mouthsheet_305_95.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/ScriptBar.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Mouth.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Countdown.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Game.gd" type="Script" id=8]
+[ext_resource path="res://Inputs/Audio/376306__ehohnke__newsreportmusic_loop.wav" type="AudioStream" id=9]
+[ext_resource path="res://Inputs/Photos/home-sweet-home-1497497470W4n.jpg" type="Texture" id=10]
+[ext_resource path="res://Inputs/Game_Elements/bkg_frame.png" type="Texture" id=11]
+[ext_resource path="res://Inputs/Photos/christmas-hot-chocolate-mugs.jpg" type="Texture" id=12]
+[ext_resource path="res://Inputs/Photos/1081-1240623198zgAl.jpg" type="Texture" id=13]
+[ext_resource path="res://Scenes/Background.gd" type="Script" id=14]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 4.0
+} ]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 8 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_pivot_offset = Vector2( 1306, 509 )
+color = Color( 0.458824, 0.458824, 0.458824, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Sprite" parent="."]
+modulate = Color( 0.937255, 0.937255, 0.937255, 1 )
+texture = ExtResource( 11 )
+centered = false
+script = ExtResource( 14 )
+
+[node name="Kitty" type="Sprite" parent="Background"]
+show_behind_parent = true
+position = Vector2( 1299, 590 )
+scale = Vector2( 0.889583, 0.889583 )
+texture = ExtResource( 13 )
+
+[node name="Blank2" type="Sprite" parent="Background"]
+show_behind_parent = true
+position = Vector2( 1758, 853 )
+texture = ExtResource( 11 )
+
+[node name="HotChocolate" type="Sprite" parent="Background"]
+show_behind_parent = true
+position = Vector2( 1309, 683 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 12 )
+
+[node name="Chiron" type="Sprite" parent="Background"]
+show_behind_parent = true
+position = Vector2( 1374, 647 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 10 )
+
+[node name="Blank" type="Sprite" parent="Background"]
+show_behind_parent = true
+position = Vector2( 1758, 853 )
+texture = ExtResource( 11 )
+
+[node name="PepperStanding" type="AnimatedSprite" parent="."]
+position = Vector2( 421, 700 )
+frames = SubResource( 1 )
+playing = true
+
+[node name="Mouth" type="Sprite" parent="PepperStanding"]
+position = Vector2( 0, 89 )
+texture = ExtResource( 4 )
+hframes = 3
+vframes = 3
+frame = 8
+script = ExtResource( 6 )
+
+[node name="SpeakingBar" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.72549 )
+position = Vector2( 958, 169 )
+texture = ExtResource( 3 )
+
+[node name="ScriptBar" type="HBoxContainer" parent="."]
+margin_top = 60.0
+margin_right = 1920.0
+margin_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1714, 817 )
+scale = Vector2( 0.75, 0.75 )
+timer_length = 53
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -5.0
+autoplay = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

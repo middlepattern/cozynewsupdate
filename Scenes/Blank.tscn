@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Inputs/Theme/fat_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/Blank.gd" type="Script" id=2]
+[ext_resource path="res://Inputs/Theme/Xbox_Font.tres" type="Theme" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 0.686275, 0, 1 )
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.603922, 1, 0.501961, 1 )
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="Phoneme" type="VBoxContainer"]
+margin_left = 871.0
+margin_right = 1048.0
+margin_bottom = 217.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="."]
+margin_right = 237.0
+margin_bottom = 20.0
+custom_constants/margin_right = 10
+custom_constants/margin_left = 10
+
+[node name="TimeBar" type="ProgressBar" parent="Margin"]
+margin_left = 10.0
+margin_right = 227.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+step = 0.001
+value = 100.0
+percent_visible = false
+
+[node name="Word" type="Label" parent="."]
+margin_top = 24.0
+margin_right = 237.0
+margin_bottom = 137.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_colors/font_outline_modulate = Color( 0.196078, 0.196078, 0.196078, 0.211765 )
+text = "Blank"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Action" type="Label" parent="."]
+margin_top = 141.0
+margin_right = 237.0
+margin_bottom = 293.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "["
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+autoplay = true
